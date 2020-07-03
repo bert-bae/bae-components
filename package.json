@@ -1,0 +1,16 @@
+{
+  "name": "bae-components",
+  "version": "1.0.0",
+  "description": "React components library for Bae projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "custom"
+  ],
+  "author": "Elbert Bae",
+  "license": "ISC"
+}
