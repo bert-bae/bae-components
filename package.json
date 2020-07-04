@@ -4,7 +4,9 @@
   "description": "React components library for Bae projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [
     "react",
@@ -12,5 +14,29 @@
     "custom"
   ],
   "author": "Elbert Bae",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "sass": "^1.26.9",
+    "sass-loader": "^9.0.0",
+    "react-hot-loader": "^4.12.6",
+    "style-loader": "^0.23.0",
+    "typescript": "^3.9.6",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
 }
