@@ -1,0 +1,13 @@
+.bae-calendar-header {
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 568px) {
+}

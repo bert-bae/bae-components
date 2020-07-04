@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="center-item">
-          <BaeCalendar />
+          <BaeCalendar theme="salmon" />
         </div>
       </div>
     );

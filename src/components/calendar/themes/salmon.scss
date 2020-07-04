@@ -1,0 +1,24 @@
+$primaryColor: #fa8072;
+$activeTextColor: #f8f8ff;
+
+.bae-calendar-header {
+  background-color: $primaryColor;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $activeTextColor;
+}
+
+.bae-weekday-indicators {
+  .weekday-indicator-icon {
+    &.active {
+      background-color: $primaryColor;
+      color: $activeTextColor;
+    }
+  }
+}
