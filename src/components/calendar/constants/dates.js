@@ -14,6 +14,7 @@ const monthsFull = [
   'November',
   'December',
 ];
+
 const monthsShort = [
   'Jan',
   'Feb',

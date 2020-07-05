@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment';
 import './bae-calendar.scss';
 
@@ -8,7 +8,11 @@ import DateIndicator from './components/date-indicator';
 import MonthIndicator from './components/month-indicator';
 // https://uicookies.com/html-calendar/
 
-import { getMonthDates, getMonthSet } from './utils/date-utils';
+import {
+  getMonthDates,
+  getMonthSet,
+  presetDateTracker,
+} from './utils/date-utils';
 
 const themes = {
   salmon: 'salmon-theme',
@@ -16,7 +20,8 @@ const themes = {
   rouge: 'rouge-theme',
 };
 
-const BaeCalendar = ({ theme, onDateSelect }) => {
+const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
+  const presetActiveDates = useRef(presetDateTracker(activeDates || []));
   const [year, setYear] = useState(moment().year());
   const [month, setMonth] = useState(moment().month());
   const [selectDate, setSelectDate] = useState(moment().date());
@@ -46,6 +51,10 @@ const BaeCalendar = ({ theme, onDateSelect }) => {
       <WeekdayIndicator />
       <DateIndicator
         datesInMonth={datesInMonth}
+        activeDates={
+          presetActiveDates.current[year] &&
+          presetActiveDates.current[year][month]
+        }
         selectDate={selectDate}
         setSelectDate={setSelectDate}
       />
