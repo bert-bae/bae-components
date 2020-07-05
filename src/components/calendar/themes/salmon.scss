@@ -1,4 +1,5 @@
 $primaryColor: #fa8072;
+$secondaryColor: #ffa98f;
 $activeTextColor: #f8f8ff;
 
 .bae-calendar-header {
@@ -17,6 +18,19 @@ h6 {
 .bae-weekday-indicators {
   .weekday-indicator-icon {
     &.active {
+      background-color: $primaryColor;
+      color: $activeTextColor;
+    }
+  }
+}
+
+.bae-date-indicator {
+  .date-icon {
+    &.active {
+      background-color: $secondaryColor;
+      color: $activeTextColor;
+    }
+    &.selected {
       background-color: $primaryColor;
       color: $activeTextColor;
     }
