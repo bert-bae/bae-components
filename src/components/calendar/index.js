@@ -47,7 +47,11 @@ const BaeCalendar = ({ theme, callback }) => {
         selectDate={selectDate}
         setSelectDate={setSelectDate}
       />
-      <MonthIndicator monthSet={getMonthSet(month)} setMonth={setMonth} />
+      <MonthIndicator
+        monthSet={getMonthSet(month)}
+        setMonth={setMonth}
+        setYear={setYear}
+      />
     </div>
   );
 };

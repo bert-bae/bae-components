@@ -3,9 +3,19 @@ import './month-indicator.scss';
 
 import { monthsFull } from '../constants/dates';
 
-const MonthIndicator = ({ monthSet, setMonth }) => {
+const MonthIndicator = ({ monthSet, setMonth, setYear }) => {
   const changeMonth = (e) => {
-    setMonth(Number(e.target.getAttribute('data-month')));
+    const month = Number(e.target.getAttribute('data-month'));
+
+    if (month === 0 && monthSet.current === 11) {
+      setYear((y) => y + 1);
+    }
+
+    if (month === 11 && monthSet.current === 0) {
+      setYear((y) => y - 1);
+    }
+
+    setMonth(month);
   };
 
   return (
