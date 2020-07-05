@@ -13,7 +13,8 @@ const themes = {
   salmon: 'salmon-theme',
 };
 
-const BaeCalendar = ({ theme }) => {
+const BaeCalendar = ({ theme, callback }) => {
+  const [year, setYear] = useState(moment().year());
   const [month, setMonth] = useState(moment().month());
   const [selectDate, setSelectDate] = useState(moment().date());
   const [datesInMonth, setDatesInMonth] = useState([]);
@@ -22,11 +23,24 @@ const BaeCalendar = ({ theme }) => {
     setDatesInMonth(getMonthDates(month));
   }, [month]);
 
+  useEffect(() => {
+    const fullDate = moment(`${month}-${selectDate}-${year}`, 'MM-DD-YYYY')
+      .utc()
+      .toDate();
+    if (callback) {
+      callback(fullDate);
+    }
+  }, [selectDate]);
+
   return (
     <div className={`bae-calendar-container ${themes[theme]}`}>
       <CalendarHeader theme="salmon" />
       <WeekdayIndicator />
-      <DateIndicator datesInMonth={datesInMonth} selectDate={selectDate} />
+      <DateIndicator
+        datesInMonth={datesInMonth}
+        selectDate={selectDate}
+        setSelectDate={setSelectDate}
+      />
     </div>
   );
 };
