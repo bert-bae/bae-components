@@ -25,7 +25,7 @@ const BaeCalendar = ({ theme, callback }) => {
   }, [month, year]);
 
   useEffect(() => {
-    const fullDate = moment(`${month}-${selectDate}-${year}`, 'MM-DD-YYYY')
+    const fullDate = moment(`${month + 1}-${selectDate}-${year}`, 'MM-DD-YYYY')
       .utc()
       .toDate();
     if (callback) {
