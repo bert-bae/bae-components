@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DateIndicator = ({ datesInMonth, selectDate, setSelectDate }) => {
-  const onClick = (e) => {
+  const changeDate = (e) => {
     setSelectDate(Number(e.target.getAttribute('data-date')));
   };
 
@@ -12,7 +12,7 @@ const DateIndicator = ({ datesInMonth, selectDate, setSelectDate }) => {
         className={`date-icon ${selected}`}
         data-date={date}
         key={key}
-        onClick={onClick}
+        onClick={changeDate}
       >
         {date}
       </div>

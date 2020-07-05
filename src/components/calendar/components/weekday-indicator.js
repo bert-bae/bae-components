@@ -1,6 +1,5 @@
 import React from 'react';
-
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+import { weekdays } from '../constants/dates';
 
 const WeekdayIndicator = () => {
   const weekdayIcons = weekdays.map((day, key) => {

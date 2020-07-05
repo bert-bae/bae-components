@@ -5,9 +5,10 @@ import './bae-calendar.scss';
 import CalendarHeader from './components/calendar-header';
 import WeekdayIndicator from './components/weekday-indicator';
 import DateIndicator from './components/date-indicator';
+import MonthIndicator from './components/month-indicator';
 // https://uicookies.com/html-calendar/
 
-import { getMonthDates } from './utils/date-utils';
+import { getMonthDates, getMonthSet } from './utils/date-utils';
 
 const themes = {
   salmon: 'salmon-theme',
@@ -20,8 +21,8 @@ const BaeCalendar = ({ theme, callback }) => {
   const [datesInMonth, setDatesInMonth] = useState([]);
 
   useEffect(() => {
-    setDatesInMonth(getMonthDates(month));
-  }, [month]);
+    setDatesInMonth(getMonthDates(month, year));
+  }, [month, year]);
 
   useEffect(() => {
     const fullDate = moment(`${month}-${selectDate}-${year}`, 'MM-DD-YYYY')
@@ -30,17 +31,23 @@ const BaeCalendar = ({ theme, callback }) => {
     if (callback) {
       callback(fullDate);
     }
-  }, [selectDate]);
+  }, [selectDate, month, year]);
 
   return (
     <div className={`bae-calendar-container ${themes[theme]}`}>
-      <CalendarHeader theme="salmon" />
+      <CalendarHeader
+        theme="salmon"
+        selectDate={selectDate}
+        month={month}
+        year={year}
+      />
       <WeekdayIndicator />
       <DateIndicator
         datesInMonth={datesInMonth}
         selectDate={selectDate}
         setSelectDate={setSelectDate}
       />
+      <MonthIndicator monthSet={getMonthSet(month)} setMonth={setMonth} />
     </div>
   );
 };

@@ -1,14 +1,20 @@
 import React from 'react';
+import moment from 'moment';
+import { weekdays } from '../constants/dates';
 
-const CalendarHeader = () => {
+const CalendarHeader = ({ selectDate, month, year }) => {
+  const date = moment(`${month + 1}/${selectDate}/${year}`)
+    .utc()
+    .toDate();
+
   return (
     <div className="bae-calendar-header">
       <div className="left-container">
-        <h1>Friday</h1>
-        <h1>July 2nd</h1>
+        <h1>{moment(date).format('dddd')}</h1>
+        <h1>{moment(date).format('MMMM Do')}</h1>
       </div>
       <div className="right-container">
-        <h3>2020</h3>
+        <h3>{moment(date).year()}</h3>
       </div>
     </div>
   );
