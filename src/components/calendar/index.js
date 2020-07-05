@@ -14,7 +14,7 @@ const themes = {
   salmon: 'salmon-theme',
 };
 
-const BaeCalendar = ({ theme, callback }) => {
+const BaeCalendar = ({ theme, onDateSelect }) => {
   const [year, setYear] = useState(moment().year());
   const [month, setMonth] = useState(moment().month());
   const [selectDate, setSelectDate] = useState(moment().date());
@@ -28,8 +28,8 @@ const BaeCalendar = ({ theme, callback }) => {
     const fullDate = moment(`${month + 1}-${selectDate}-${year}`, 'MM-DD-YYYY')
       .utc()
       .toDate();
-    if (callback) {
-      callback(fullDate);
+    if (onDateSelect) {
+      onDateSelect(fullDate);
     }
   }, [selectDate, month, year]);
 

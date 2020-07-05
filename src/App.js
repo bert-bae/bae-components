@@ -9,7 +9,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="center-item">
-          <BaeCalendar theme="salmon" callback={(date) => console.log(date)} />
+          <BaeCalendar
+            theme="salmon"
+            onDateSelect={(date) => console.log(date)}
+          />
         </div>
       </div>
     );
