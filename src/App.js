@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
         <div className="center-item">
           <BaeCalendar
-            theme="rouge"
+            theme="salmon"
             onDateSelect={(date) => console.log(date)}
           />
         </div>
