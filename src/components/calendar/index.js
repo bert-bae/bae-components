@@ -12,6 +12,8 @@ import { getMonthDates, getMonthSet } from './utils/date-utils';
 
 const themes = {
   salmon: 'salmon-theme',
+  monochrome: 'monochrome-theme',
+  rouge: 'rouge-theme',
 };
 
 const BaeCalendar = ({ theme, onDateSelect }) => {

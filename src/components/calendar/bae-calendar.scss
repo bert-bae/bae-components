@@ -18,6 +18,12 @@
   &.salmon-theme {
     @import './themes/salmon.scss';
   }
+  &.monochrome-theme {
+    @import './themes/monochrome.scss';
+  }
+  &.rouge-theme {
+    @import './themes/rouge.scss';
+  }
 
   @import './components/calendar-header.scss';
   @import './components/weekday-indicator.scss';
