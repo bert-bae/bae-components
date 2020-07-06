@@ -1,5 +1,9 @@
 import React from 'react';
-import { getDayOfMonth, getMonthDayYear } from '../utils/moment-utils';
+import {
+  getDayOfMonth,
+  getMonthDayYear,
+  getMonth,
+} from '../utils/moment-utils';
 
 const DateIndicator = ({
   datesInMonth,
@@ -12,10 +16,10 @@ const DateIndicator = ({
   };
 
   const monthDates = datesInMonth.map((i, key) => {
-    const dayOfMonth = getDayOfMonth(i.date);
     const selected =
       getMonthDayYear(selectDate) === getMonthDayYear(i.date) ? 'selected' : '';
-    const active = activeDates && activeDates[dayOfMonth] ? 'active' : '';
+    const active =
+      activeDates && activeDates[getMonthDayYear(i.date)] ? 'active' : '';
 
     return (
       <div
@@ -25,12 +29,16 @@ const DateIndicator = ({
         key={key}
         onClick={changeDate}
       >
-        {dayOfMonth}
+        {getDayOfMonth(i.date)}
       </div>
     );
   });
 
-  return <div className="bae-date-indicator">{monthDates}</div>;
+  return (
+    <div className="bae-date-indicator">
+      {datesInMonth.length > 0 && monthDates}
+    </div>
+  );
 };
 
 export default DateIndicator;

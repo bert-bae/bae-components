@@ -1,6 +1,10 @@
 const moment = require('moment');
-const { deepCopy } = require('./object-utils');
-const { getSpecificDate, getMonth, getYear } = require('./moment-utils');
+const {
+  getSpecificDate,
+  getMonth,
+  getYear,
+  getMonthDayYear,
+} = require('./moment-utils');
 const { totalDatesPerMonthView } = require('../constants/dates');
 
 const getPrevMonthYear = (month, year) => {
@@ -99,34 +103,15 @@ const getMonthSet = (selectDate) => {
 
 const presetDateTracker = (dates) => {
   const result = {};
-  const dateTracker = {
-    '0': {},
-    '1': {},
-    '2': {},
-    '3': {},
-    '4': {},
-    '5': {},
-    '6': {},
-    '7': {},
-    '8': {},
-    '9': {},
-    '10': {},
-    '11': {},
-  };
 
   if (dates && Array.isArray(dates)) {
     dates.forEach((date) => {
-      const year = moment(date).year();
-      const month = moment(date).month();
-      const dateOfMonth = moment(date).date();
-      if (!result[year]) {
-        result[year] = deepCopy(dateTracker);
-      }
+      const dateStr = getMonthDayYear(date);
 
-      if (!result[year][month][dateOfMonth]) {
-        result[year][month][dateOfMonth] = 1;
+      if (!result[dateStr]) {
+        result[dateStr] = 1;
       } else {
-        result[year][month][dateOfMonth] += 1;
+        result[dateStr] += 1;
       }
     });
   }

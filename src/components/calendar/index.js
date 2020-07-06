@@ -28,7 +28,9 @@ const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
   const [datesInMonth, setDatesInMonth] = useState([]);
 
   useEffect(() => {
-    setDatesInMonth(getMonthDates(month, year));
+    if (month && year) {
+      setDatesInMonth(getMonthDates(month, year));
+    }
   }, [month, year]);
 
   useEffect(() => {
@@ -45,10 +47,7 @@ const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
       <WeekdayIndicator />
       <DateIndicator
         datesInMonth={datesInMonth}
-        activeDates={
-          presetActiveDates.current[year] &&
-          presetActiveDates.current[year][month]
-        }
+        activeDates={presetActiveDates.current}
         selectDate={selectDate}
         setSelectDate={setSelectDate}
       />
