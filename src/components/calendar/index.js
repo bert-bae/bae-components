@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import moment from 'moment';
+import { getMonth, getYear, getToday } from './utils/moment-utils';
 import './bae-calendar.scss';
 
 import CalendarHeader from './components/calendar-header';
@@ -22,9 +22,9 @@ const themes = {
 
 const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
   const presetActiveDates = useRef(presetDateTracker(activeDates || []));
-  const [year, setYear] = useState(moment().year());
-  const [month, setMonth] = useState(moment().month());
-  const [selectDate, setSelectDate] = useState(moment().date());
+  const [year, setYear] = useState();
+  const [month, setMonth] = useState();
+  const [selectDate, setSelectDate] = useState(getToday());
   const [datesInMonth, setDatesInMonth] = useState([]);
 
   useEffect(() => {
@@ -32,22 +32,16 @@ const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
   }, [month, year]);
 
   useEffect(() => {
-    const fullDate = moment(`${month + 1}-${selectDate}-${year}`, 'MM-DD-YYYY')
-      .utc()
-      .toDate();
+    setMonth(getMonth(selectDate));
+    setYear(getYear(selectDate));
     if (onDateSelect) {
-      onDateSelect(fullDate);
+      onDateSelect(selectDate);
     }
-  }, [selectDate, month, year]);
+  }, [selectDate]);
 
   return (
     <div className={`bae-calendar-container ${themes[theme]}`}>
-      <CalendarHeader
-        theme="salmon"
-        selectDate={selectDate}
-        month={month}
-        year={year}
-      />
+      <CalendarHeader theme="salmon" selectDate={selectDate} />
       <WeekdayIndicator />
       <DateIndicator
         datesInMonth={datesInMonth}
@@ -59,9 +53,8 @@ const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
         setSelectDate={setSelectDate}
       />
       <MonthIndicator
-        monthSet={getMonthSet(month)}
-        setMonth={setMonth}
-        setYear={setYear}
+        monthSet={getMonthSet(selectDate)}
+        setSelectDate={setSelectDate}
       />
     </div>
   );

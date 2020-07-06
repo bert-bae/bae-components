@@ -1,35 +1,62 @@
 const moment = require('moment');
 const { deepCopy } = require('./object-utils');
+const { getSpecificDate, getMonth, getYear } = require('./moment-utils');
+
+const getPrevMonthYear = (month, year) => {
+  if (month === 0) {
+    return {
+      month: 11,
+      year: year - 1,
+    };
+  } else {
+    return {
+      month: month - 1,
+      year,
+    };
+  }
+};
 
 const getMonthDates = (month, year) => {
-  const daysInMonth = moment().daysInMonth(month);
+  const daysInMonth = moment([year, month]).daysInMonth();
   const firstWeekday = moment([year, month]).startOf('month').weekday();
   const result = [];
 
-  for (let i = 0; i < firstWeekday; i++) {
-    result.push(null);
+  const prevMonthYear = getPrevMonthYear(month, year);
+  const prevDaysInMonth = moment([
+    prevMonthYear.year,
+    prevMonthYear.month,
+  ]).daysInMonth();
+  for (let i = firstWeekday - 1; i >= 0; i--) {
+    result.push(
+      getSpecificDate(
+        prevMonthYear.month,
+        prevDaysInMonth - i,
+        prevMonthYear.year
+      )
+    );
   }
 
   for (let j = 1; j <= daysInMonth; j++) {
-    result.push(j);
+    result.push(getSpecificDate(month + 1, j, year));
   }
 
   return result;
 };
 
-const getMonthSet = (month) => {
+const getMonthSet = (selectDate) => {
+  const month = getMonth(selectDate) + 1;
   const result = {
-    current: month,
-    prev: month - 1,
-    next: month + 1,
+    current: selectDate,
+    prev: getSpecificDate(month - 1, 1, getYear(selectDate)),
+    next: getSpecificDate(month + 1, 1, getYear(selectDate)),
   };
 
-  if (month === 0) {
-    result.prev = 11;
+  if (month === 1) {
+    result.prev = getSpecificDate(12, 1, getYear(selectDate) - 1);
   }
 
-  if (month === 11) {
-    result.next = 0;
+  if (month === 12) {
+    result.next = getSpecificDate(1, 1, getYear(selectDate) + 1);
   }
 
   return result;
