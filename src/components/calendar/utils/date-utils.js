@@ -1,6 +1,7 @@
 const moment = require('moment');
 const { deepCopy } = require('./object-utils');
 const { getSpecificDate, getMonth, getYear } = require('./moment-utils');
+const { totalDatesPerMonthView } = require('../constants/dates');
 
 const getPrevMonthYear = (month, year) => {
   if (month === 1) {
@@ -16,6 +17,20 @@ const getPrevMonthYear = (month, year) => {
   }
 };
 
+const getNextMonthYear = (month, year) => {
+  if (month === 12) {
+    return {
+      month: 1,
+      year: year + 1,
+    };
+  } else {
+    return {
+      month: month + 1,
+      year,
+    };
+  }
+};
+
 const getMonthDates = (month, year) => {
   const daysInMonth = moment(`${month}-${year}`, 'MM-YYYY').daysInMonth();
   const firstWeekday = moment(`${month}-${year}`, 'MM-YYYY')
@@ -23,6 +38,7 @@ const getMonthDates = (month, year) => {
     .weekday();
   const result = [];
 
+  // Based on index number of firstWeekday, add number of previous month's overflow dates
   const prevMonthYear = getPrevMonthYear(month, year);
   const prevDaysInMonth = moment(
     `${prevMonthYear.month}-${prevMonthYear.year}`,
@@ -39,11 +55,24 @@ const getMonthDates = (month, year) => {
     });
   }
 
+  // Add all current month dates
   for (let j = 1; j <= daysInMonth; j++) {
     result.push({
       currentMonth: true,
       date: getSpecificDate(month, j, year),
     });
+  }
+
+  // Overflow dates for next month to meet totalDatesPerMonthView requirement
+  if (result.length < totalDatesPerMonthView) {
+    const daysToAdd = totalDatesPerMonthView - result.length;
+    const nextMonthYear = getNextMonthYear(month, year);
+    for (let k = 1; k <= daysToAdd; k++) {
+      result.push({
+        currentMonth: false,
+        date: getSpecificDate(nextMonthYear.month, k, nextMonthYear.year),
+      });
+    }
   }
 
   return result;

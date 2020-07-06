@@ -1,5 +1,5 @@
 import React from 'react';
-import { getDayOfMonth } from '../utils/moment-utils';
+import { getDayOfMonth, getMonthDayYear } from '../utils/moment-utils';
 
 const DateIndicator = ({
   datesInMonth,
@@ -13,7 +13,8 @@ const DateIndicator = ({
 
   const monthDates = datesInMonth.map((i, key) => {
     const dayOfMonth = getDayOfMonth(i.date);
-    const selected = getDayOfMonth(selectDate) === dayOfMonth ? 'selected' : '';
+    const selected =
+      getMonthDayYear(selectDate) === getMonthDayYear(i.date) ? 'selected' : '';
     const active = activeDates && activeDates[dayOfMonth] ? 'active' : '';
 
     return (
