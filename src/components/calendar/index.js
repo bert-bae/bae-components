@@ -32,7 +32,7 @@ const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
   }, [month, year]);
 
   useEffect(() => {
-    setMonth(getMonth(selectDate));
+    setMonth(getMonth(selectDate) + 1);
     setYear(getYear(selectDate));
     if (onDateSelect) {
       onDateSelect(selectDate);

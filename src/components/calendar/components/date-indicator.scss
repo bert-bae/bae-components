@@ -13,6 +13,9 @@
     width: 25px;
     padding: 5px;
     cursor: pointer;
+    &[data-active-month='false'] {
+      color: rgba(0, 0, 0, 0.3);
+    }
     &.active,
     &.selected {
       border-radius: 50%;

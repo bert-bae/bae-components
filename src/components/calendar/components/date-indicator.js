@@ -11,15 +11,16 @@ const DateIndicator = ({
     setSelectDate(e.target.getAttribute('data-date'));
   };
 
-  const monthDates = datesInMonth.map((date, key) => {
-    const dayOfMonth = getDayOfMonth(date);
-    const selected = selectDate === dayOfMonth ? 'selected' : '';
+  const monthDates = datesInMonth.map((i, key) => {
+    const dayOfMonth = getDayOfMonth(i.date);
+    const selected = getDayOfMonth(selectDate) === dayOfMonth ? 'selected' : '';
     const active = activeDates && activeDates[dayOfMonth] ? 'active' : '';
 
     return (
       <div
         className={`date-icon ${selected} ${active}`}
-        data-date={date.toString()}
+        data-active-month={i.currentMonth}
+        data-date={i.date.toString()}
         key={key}
         onClick={changeDate}
       >
