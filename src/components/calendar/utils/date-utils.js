@@ -35,7 +35,7 @@ const getNextMonthYear = (month, year) => {
   }
 };
 
-const getMonthDates = (month, year) => {
+const getDatesInMonthDisplay = (month, year) => {
   const daysInMonth = moment(`${month}-${year}`, 'MM-YYYY').daysInMonth();
   const firstWeekday = moment(`${month}-${year}`, 'MM-YYYY')
     .startOf('month')
@@ -119,4 +119,4 @@ const presetDateTracker = (dates) => {
   return result;
 };
 
-export { getMonthDates, getMonthSet, presetDateTracker };
+export { getDatesInMonthDisplay, getMonthSet, presetDateTracker };

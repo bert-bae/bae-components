@@ -3,17 +3,19 @@ import {
   getDayOfMonth,
   getMonthDayYear,
   getMonth,
+  getYear,
 } from '../utils/moment-utils';
+import { getDatesInMonthDisplay } from '../utils/date-utils';
 
-const DateIndicator = ({
-  datesInMonth,
-  activeDates,
-  selectDate,
-  setSelectDate,
-}) => {
+const DateIndicator = ({ activeDates, selectDate, setSelectDate }) => {
   const changeDate = (e) => {
     setSelectDate(e.target.getAttribute('data-date'));
   };
+
+  const datesInMonth = getDatesInMonthDisplay(
+    getMonth(selectDate) + 1,
+    getYear(selectDate)
+  );
 
   const monthDates = datesInMonth.map((i, key) => {
     const selected =
@@ -34,11 +36,7 @@ const DateIndicator = ({
     );
   });
 
-  return (
-    <div className="bae-date-indicator">
-      {datesInMonth.length > 0 && monthDates}
-    </div>
-  );
+  return <div className="bae-date-indicator">{monthDates}</div>;
 };
 
 export default DateIndicator;
