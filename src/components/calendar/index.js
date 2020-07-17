@@ -8,7 +8,7 @@ import DateIndicator from './components/date-indicator';
 import MonthIndicator from './components/month-indicator';
 // https://uicookies.com/html-calendar/
 
-import { getMonthSet, presetDateTracker } from './utils/date-utils';
+import { presetDateTracker } from './utils/date-utils';
 
 const themes = {
   salmon: 'salmon-theme',
@@ -20,12 +20,11 @@ const BaeCalendar = ({ theme, activeDates, onDateSelect }) => {
   const presetActiveDates = useRef(presetDateTracker(activeDates || []));
   const [selectDate, setSelectDate] = useState(getToday());
 
-  // useEffect(() => {
-  //   console.log(selectDate);
-  //   if (onDateSelect) {
-  //     onDateSelect(selectDate);
-  //   }
-  // }, [selectDate]);
+  useEffect(() => {
+    if (onDateSelect) {
+      onDateSelect(selectDate);
+    }
+  }, [selectDate]);
 
   return (
     <div className={`bae-calendar-container ${themes[theme]}`}>

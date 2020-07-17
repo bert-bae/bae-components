@@ -11,7 +11,10 @@ class App extends Component {
         <div className="center-item">
           <BaeCalendar
             theme="salmon"
-            onDateSelect={(date) => date}
+            onDateSelect={(date) => {
+              console.log(`The callback is accessing the date: ${date}`);
+              return date;
+            }}
             activeDates={null}
           />
         </div>
